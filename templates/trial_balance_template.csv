@@ -1,0 +1,7 @@
+account_code,account_name,debit,credit
+1010,Cash,10000.00,0.00
+1020,Accounts Receivable,5000.00,0.00
+2010,Accounts Payable,0.00,3000.00
+3010,Capital,0.00,12000.00
+4010,Sales Revenue,0.00,5000.00
+5010,Rent Expense,1000.00,0.00
