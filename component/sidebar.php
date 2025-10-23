@@ -31,182 +31,114 @@
           <a href="dashboard.php">
             <i class="fas fa-home"></i>
             <p>Dashboard</p>
-
           </a>
-          <!-- <div class="collapse" id="dashboard">
-            <ul class="nav nav-collapse">
-              <li>
-                <a href="dashboard.php">
-                  <span class="sub-item">Dashboard 1</span>
-                </a>
-              </li>
-            </ul>
-          </div> -->
         </li>
         <li class="nav-section">
           <span class="sidebar-mini-icon">
             <i class="fa fa-ellipsis-h"></i>
           </span>
-          <h4 class="text-section"></h4>
+          <h4 class="text-section">Admin</h4>
         </li>
         <?php if ($_SESSION['role'] === 'Admin'): ?>
-          <li class="nav-item">
-            <a data-bs-toggle="collapse" href="#Admin">
-              <i class="fas fa-layer-group"></i>
-              <p>Admin</p>
-              <span class="caret"></span>
+           <li class="nav-item">
+            <a href="manage_users.php">
+              <i class="fas fa-users"></i>
+              <p>Manage Users</p>
             </a>
-            <div class="collapse" id="Admin">
-              <ul class="nav nav-collapse">
-                <li>
-                  <a href="register.php">
-                    <span class="sub-item">Register User</span>
-                  </a>
-                </li>
-                <li>
-                  <a href="manage_users.php">
-                    <span class="sub-item">Manage Users</span>
-                  </a>
-                </li>
-                <li>
-                  <a href="manage_clients.php">
-                    <span class="sub-item">Manage Clients</span>
-                  </a>
-                </li>
-                <li>
-                  <a href="manage_engagements.php">
-                    <span class="sub-item">Manage Engagements</span>
-                  </a>
-                </li>
-                <!-- <li>
-                  <a href="buttons.php">
-                    <span class="sub-item">Buttons</span>
-                  </a>
-                </li>
-                <li>
-                  <a href="gridsystem.php">
-                    <span class="sub-item">Grid System</span>
-                  </a>
-                </li>
-                <li>
-                  <a href="panels.php">
-                    <span class="sub-item">Panels</span>
-                  </a>
-                </li>
-                <li>
-                  <a href="notifications.php">
-                    <span class="sub-item">Notifications</span>
-                  </a>
-                </li>
-                <li>
-                  <a href="sweetalert.php">
-                    <span class="sub-item">Sweet Alert</span>
-                  </a>
-                </li>
-                <li>
-                  <a href="font-awesome-icons.php">
-                    <span class="sub-item">Font Awesome Icons</span>
-                  </a>
-                </li>
-                <li>
-                  <a href="simple-line-icons.php">
-                    <span class="sub-item">Simple Line Icons</span>
-                  </a>
-                </li>
-                <li>
-                  <a href="typography.php">
-                    <span class="sub-item">Typography</span>
-                  </a>
-                </li> -->
-              </ul>
-            </div>
           </li>
+           <li class="nav-item">
+            <a href="manage_clients.php">
+              <i class="fas fa-user-tie"></i>
+              <p>Manage Clients</p>
+            </a>
+          </li>
+           <li class="nav-item">
+            <a href="manage_engagements.php">
+              <i class="far fa-comments"></i>
+              <p>Manage Engagements</p>
+            </a>
+          </li>
+
         <?php endif; ?>
 
         <?php if ($_SESSION['role'] === 'Reviewer' || $_SESSION['role'] === 'Admin'): ?>
+          <li class="nav-section">
+            <span class="sidebar-mini-icon">
+              <i class="fa fa-ellipsis-h"></i>
+            </span>
+            <h4 class="text-section">Reviewer</h4>
+          </li>
           <li class="nav-item">
-            <a data-bs-toggle="collapse" href="#reviewer">
-              <i class="fas fa-th-list"></i>
-              <p>Reviewer</p>
-              <span class="caret"></span>
+            <a href="engagements_for_review.php">
+              <i class="fas fa-comments"></i>
+              <p>Engagements for Review</p>
             </a>
-            <div class="collapse" id="reviewer">
-              <ul class="nav nav-collapse">
-                <li>
-                  <a href="engagements_for_review.php">
-                    <span class="sub-item">Engagements for Review</span>
-                  </a>
-                </li>
-                <li>
-                  <a href="open_queries.php">
-                    <span class="sub-item">My Queries</span>
-                  </a>
-                </li>
-              </ul>
-            </div>
+          </li>
+          <li class="nav-item">
+            <a href="open_queries.php">
+              <i class="fas fa-comment-dots"></i>
+              <p>My Queries</p>
+            </a>
           </li>
         <?php endif; ?>
 
         <?php if ($_SESSION['role'] == 'Auditor' || $_SESSION['role'] == 'Admin'): ?>
+          <li class="nav-section">
+            <span class="sidebar-mini-icon">
+              <i class="fa fa-ellipsis-h"></i>
+            </span>
+            <h4 class="text-section">Auditor</h4>
+          </li>
+
           <li class="nav-item">
-            <a data-bs-toggle="collapse" href="#auditor">
-              <i class="fas fa-pen-square"></i>
-              <p>Auditor</p>
-              <span class="caret"></span>
+            <a href="my_engagements.php">
+              <i class="fas fa-comments"></i>
+              <p>My Engagements</p>
             </a>
-            <div class="collapse" id="auditor">
-              <ul class="nav nav-collapse">
-                <li>
-                  <a href="my_engagements.php">
-                    <span class="sub-item">my engagements</span>
-                  </a>
-                </li>
-                <li>
-                  <a href="open_queries.php">
-                    <span class="sub-item">Open Queries</span>
-                  </a>
-                </li>
-              </ul>
-            </div>
+          </li>
+          <li class="nav-item">
+            <a href="open_queries.php">
+              <i class="fas fa-comment-dots"></i>
+              <p>Open Queries</p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="view_reports.php">
+              <i class="fas fa-file-alt"></i>
+              <p>View Reports</p>
+            </a>
           </li>
         <?php endif; ?>
 
         <?php if ($_SESSION['role'] === 'Client'): ?>
-          <li class="nav-item">
-            <a data-bs-toggle="collapse" href="#client">
-              <i class="fas fa-table"></i>
-              <p>Client</p>
-              <span class="caret"></span>
+           <li class="nav-item">
+            <a href="client_engagements.php">
+              <i class="fas fa-comments"></i>
+              <p>My Engagements</p>
             </a>
-            <div class="collapse" id="client">
-              <ul class="nav nav-collapse">
-                <li>
-                  <a href="client_engagements.php">
-                    <span class="sub-item">My Engagements</span>
-                  </a>
-                </li>
-                <li>
-                  <a href="view_reports.php">
-                    <span class="sub-item">View Reports</span>
-                  </a>
-                </li>
-                <li>
-                  <a href="open_queries.php">
-                    <span class="sub-item">My Queries</span>
-                  </a>
-                </li>
-              </ul>
-            </div>
+          </li>
+           <li class="nav-item">
+            <a href="view_reports.php">
+              <i class="fas fa-file-alt"></i>
+              <p>View Reports</p>
+            </a>
+          </li>
+           <li class="nav-item">
+            <a href="open_queries.php">
+              <i class="fas fa-comment-dots"></i>
+              <p>My Queries</p>
+            </a>
           </li>
         <?php endif; ?>
 
+        <?php if($_SESSION['role'] ==='Admin') {?>
         <li class="nav-item">
-          <a href="documentation.md">
-            <i class="fas fa-file"></i>
+          <a href="documentation/index.php">
+            <i class="fas fa-file-archive"></i>
             <p>Documentation</p>
-            <span class="badge badge-secondary">1</span>
           </a>
         </li>
+        <?php } ?>
       </ul>
     </div>
   </div>

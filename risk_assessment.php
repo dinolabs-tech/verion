@@ -44,7 +44,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $engagement) {
     } else {
       if ($action === 'add') {
         $stmt = $conn->prepare("INSERT INTO risk_assessment (engagement_id, risk_area, inherent_risk, control_risk, detection_risk, overall_risk, mitigation_strategy, assessed_by_user_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
-        $stmt->bind_param("issssssi", $engagement_id, $risk_area, $inherent_risk, $control_risk, $detection_risk, $overall_risk, $mitigation_strategy, $assessed_by_user_id);
+        $stmt->bind_param("isssssss", $engagement_id, $risk_area, $inherent_risk, $control_risk, $detection_risk, $overall_risk, $mitigation_strategy, $assessed_by_user_id);
         if ($stmt->execute()) {
           $success_message = "Risk assessment added successfully!";
         } else {
@@ -54,7 +54,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $engagement) {
       } elseif ($action === 'edit') {
         $risk_id = $_POST['risk_id'] ?? 0;
         $stmt = $conn->prepare("UPDATE risk_assessment SET risk_area = ?, inherent_risk = ?, control_risk = ?, detection_risk = ?, overall_risk = ?, mitigation_strategy = ?, assessed_by_user_id = ?, updated_at = CURRENT_TIMESTAMP WHERE risk_id = ?");
-        $stmt->bind_param("sssssisi", $risk_area, $inherent_risk, $control_risk, $detection_risk, $overall_risk, $mitigation_strategy, $assessed_by_user_id, $risk_id);
+        $stmt->bind_param("ssssssss", $risk_area, $inherent_risk, $control_risk, $detection_risk, $overall_risk, $mitigation_strategy, $assessed_by_user_id, $risk_id);
         if ($stmt->execute()) {
           $success_message = "Risk assessment updated successfully!";
         } else {

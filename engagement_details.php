@@ -145,60 +145,171 @@ $conn->close();
 
                 <hr>
 
-                <h3>Engagement Modules</h3>
-                <div class="list-group">
-                  <a href="view_trial_balance.php?engagement_id=<?= $engagement_id; ?>" class="list-group-item list-group-item-action">
-                    <i class="bi bi-table me-2"></i> View Trial Balance
-                  </a>
-                  <a href="upload_trial_balance.php?engagement_id=<?= $engagement_id; ?>" class="list-group-item list-group-item-action">
-                    <i class="bi bi-upload me-2"></i> Upload Trial Balance
-                  </a>
-                  <a href="view_balance_sheet.php?engagement_id=<?= $engagement_id; ?>" class="list-group-item list-group-item-action">
-                    <i class="bi bi-file-earmark-spreadsheet me-2"></i> View Balance Sheet
-                  </a>
-                  <a href="risk_assessment.php?engagement_id=<?php echo $engagement_id; ?>" class="list-group-item list-group-item-action">
-                    <i class="bi bi-shield-fill-exclamation me-2"></i> Risk Assessment
-                  </a>
-                  <a href="materiality_calculator.php?engagement_id=<?php echo $engagement_id; ?>" class="list-group-item list-group-item-action">
-                    <i class="bi bi-calculator me-2"></i> Materiality Calculator
-                  </a>
-                  <a href="audit_sampling.php?engagement_id=<?php echo $engagement_id; ?>" class="list-group-item list-group-item-action">
-                    <i class="bi bi-funnel me-2"></i> Audit Sampling
-                  </a>
-                  <a href="queries.php?engagement_id=<?php echo $engagement_id; ?>" class="list-group-item list-group-item-action">
-                    <i class="bi bi-question-circle me-2"></i> Queries & Responses
-                  </a>
-                  <a href="working_papers.php?engagement_id=<?php echo $engagement_id; ?>" class="list-group-item list-group-item-action">
-                    <i class="bi bi-file-earmark-text me-2"></i> Working Paper Attachments
-                  </a>
-                  <a href="audit_adjustments.php?engagement_id=<?php echo $engagement_id; ?>" class="list-group-item list-group-item-action">
-                    <i class="bi bi-pencil-square me-2"></i> Audit Adjustments
-                  </a>
-                  <a href="reconciliations.php?engagement_id=<?php echo $engagement_id; ?>" class="list-group-item list-group-item-action">
-                    <i class="bi bi-arrow-repeat me-2"></i> Reconciliations & Testing
-                  </a>
-                  <a href="exception_reports.php?engagement_id=<?php echo $engagement_id; ?>" class="list-group-item list-group-item-action">
-                    <i class="bi bi-exclamation-triangle me-2"></i> Exception Reports
-                  </a>
-                  <a href="anomaly_detection.php?engagement_id=<?php echo $engagement_id; ?>" class="list-group-item list-group-item-action">
-                    <i class="bi bi-search me-2"></i> Anomaly Detection
-                  </a>
-                  <a href="generate_reports.php?engagement_id=<?php echo $engagement_id; ?>" class="list-group-item list-group-item-action">
-                    <i class="bi bi-file-earmark-bar-graph me-2"></i> Generate Reports
-                  </a>
-                  <a href="compliance_checklists.php?engagement_id=<?php echo $engagement_id; ?>" class="list-group-item list-group-item-action">
-                    <i class="bi bi-check-square me-2"></i> Compliance & Standards
-                  </a>
-                  <a href="internal_controls.php?engagement_id=<?php echo $engagement_id; ?>" class="list-group-item list-group-item-action">
-                    <i class="bi bi-lock me-2"></i> Internal Controls
-                  </a>
-                  <a href="kpi_dashboard.php?engagement_id=<?php echo $engagement_id; ?>" class="list-group-item list-group-item-action">
-                    <i class="bi bi-graph-up me-2"></i> KPI Dashboard
-                  </a>
+                <h3 class="text-center">Engagement Modules</h3>
+                <div class="row">
+                  <div class="col-md-3">
+                    <a href="view_trial_balance.php?engagement_id=<?= $engagement_id; ?>" class="list-group-item list-group-item-action">
+                      <div class="card shadow bg-warning">
+                        <div class="card-body">
+                          <i class="fas fa-solid fa-chart-bar me-2"></i> View Trial Balance
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+
+                  <div class="col-md-3">
+                    <a href="upload_trial_balance.php?engagement_id=<?= $engagement_id; ?>" class="list-group-item list-group-item-action">
+                      <div class="card shadow bg-primary text-white">
+                        <div class="card-body">
+                          <i class="fas fa-solid fa-file-upload me-2"></i> Upload Trial Balance
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+
+                  <div class="col-md-3">
+                    <a href="view_balance_sheet.php?engagement_id=<?= $engagement_id; ?>" class="list-group-item list-group-item-action">
+                      <div class="card shadow bg-secondary text-white">
+                        <div class="card-body">
+                          <i class="fas fa-solid fa-file-invoice-dollar me-2"></i> View Balance Sheet
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+
+                  <div class="col-md-3">
+                    <a href="risk_assessment.php?engagement_id=<?php echo $engagement_id; ?>" class="list-group-item list-group-item-action">
+                      <div class="card shadow bg-danger text-white">
+                        <div class="card-body">
+                          <i class="fas fa-exclamation-triangle me-2"></i> Risk Assessment
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+
+                  <div class="col-md-3">
+                    <a href="materiality_calculator.php?engagement_id=<?php echo $engagement_id; ?>" class="list-group-item list-group-item-action">
+                      <div class="card shadow bg-success text-white">
+                        <div class="card-body">
+                          <i class="fas fa-solid fa-calculator me-2"></i> Materiality Calculator
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+
+                  <div class="col-md-3">
+                    <a href="audit_sampling.php?engagement_id=<?php echo $engagement_id; ?>" class="list-group-item list-group-item-action">
+                      <div class="card shadow bg-warning">
+                        <div class="card-body">
+                          <i class="fas fa-solid fa-bullseye me-2"></i> Audit Sampling
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+
+                  <div class="col-md-3">
+                    <a href="queries.php?engagement_id=<?php echo $engagement_id; ?>" class="list-group-item list-group-item-action">
+                      <div class="card shadow bg-primary text-white">
+                        <div class="card-body">
+                          <i class="fas fa-solid fa-comments me-2"></i> Queries & Responses
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+
+                  <div class="col-md-3">
+                    <a href="working_papers.php?engagement_id=<?php echo $engagement_id; ?>" class="list-group-item list-group-item-action">
+                      <div class="card shadow bg-secondary text-white">
+                        <div class="card-body">
+                          <i class="fas fa-solid fa-paperclip me-2"></i> Working Paper Attachments
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+
+                  <div class="col-md-3">
+                    <a href="audit_adjustments.php?engagement_id=<?php echo $engagement_id; ?>" class="list-group-item list-group-item-action">
+                      <div class="card shadow bg-info text-white">
+                        <div class="card-body">
+                          <i class="fas fa-edit fa-pen-to-square me-2"></i> Audit Adjustments
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+
+                  <div class="col-md-3">
+                    <a href="reconciliations.php?engagement_id=<?php echo $engagement_id; ?>" class="list-group-item list-group-item-action">
+                      <div class="card shadow bg-success text-white">
+                        <div class="card-body">
+                          <i class="fas fa-sync-alt me-2"></i> Reconciliations & Testing
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+
+                  <div class="col-md-3">
+                    <a href="exception_reports.php?engagement_id=<?php echo $engagement_id; ?>" class="list-group-item list-group-item-action">
+                      <div class="card shadow bg-warning">
+                        <div class="card-body">
+                          <i class="fas fa-exclamation-circle me-2"></i> Exception Reports
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+
+                  <div class="col-md-3">
+                    <a href="anomaly_detection.php?engagement_id=<?php echo $engagement_id; ?>" class="list-group-item list-group-item-action">
+                      <div class="card shadow bg-primary text-white">
+                        <div class="card-body">
+                          <i class="fas fa-glasses me-2"></i> Anomaly Detection
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+
+                  <div class="col-md-3">
+                    <a href="generate_reports.php?engagement_id=<?php echo $engagement_id; ?>" class="list-group-item list-group-item-action">
+                      <div class="card shadow bg-dark text-white">
+                        <div class="card-body">
+                          <i class="far fa-file-alt me-2"></i> Generate Reports
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+
+                  <div class="col-md-3">
+                    <a href="compliance_checklists.php?engagement_id=<?php echo $engagement_id; ?>" class="list-group-item list-group-item-action">
+                      <div class="card shadow bg-info text-white">
+                        <div class="card-body">
+                          <i class="fas fa-balance-scale me-2"></i> Compliance & Standards
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+
+                  <div class="col-md-3">
+                    <a href="internal_controls.php?engagement_id=<?php echo $engagement_id; ?>" class="list-group-item list-group-item-action">
+                      <div class="card shadow bg-success text-white">
+                        <div class="card-body">
+                          <i class="fas fa-shield-alt me-2"></i> Internal Controls
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+
+                  <div class="col-md-3">
+                    <a href="kpi_dashboard.php?engagement_id=<?php echo $engagement_id; ?>" class="list-group-item list-group-item-action">
+                      <div class="card shadow bg-warning">
+                        <div class="card-body">
+                          <i class="fas fa-chart-line me-2"></i> KPI Dashboard
+                        </div>
+                      </div>
+                    </a>
+                  </div>
                 </div>
 
-                <div class="mt-4">
-                  <a href="my_engagements.php" class="btn btn-secondary btn-icon btn-round"><i class="fas fa-arrow-left"></i></a>
+                <div class="mt-4 col-md-12 text-center">
+                  <a href="my_engagements.php" class="btn btn-lg btn-secondary btn-icon btn-round"><i class="fas fa-arrow-left"></i></a>
                 </div>
               <?php endif; ?>
             </div>

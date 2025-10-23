@@ -147,7 +147,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $engagement && isset($_POST['report
     $stmt = $conn->prepare("INSERT INTO $table_name (engagement_id, report_type, title, content, generated_by_user_id) VALUES (?, ?, ?, ?, ?)");
     $stmt->bind_param("isssi", $engagement_id, $report_version_type, $report_title, $report_content, $generated_by_user_id);
     if ($stmt->execute()) {
-      $success_message = $report_type . " (" . $report_version_type . ") generated and saved successfully!";
+      $new_report_id = $conn->insert_id; // Get the ID of the newly inserted report
+      $success_message = $report_type . " (" . $report_version_type . ") generated and saved successfully! <a href=\"download_report_pdf.php?report_id=" . $new_report_id . "&report_type=" . urlencode($report_type) . "\" class=\"btn btn-success btn-sm ms-2\" target=\"_blank\">Download PDF</a>";
     } else {
       $error_message = "Error generating " . $report_type . ": " . $conn->error;
     }
@@ -225,28 +226,28 @@ $conn->close();
                     <form action="generate_reports.php?engagement_id=<?php echo $engagement_id; ?>" method="POST">
                       <input type="hidden" name="report_action" value="generate">
                       <div class="row">
-                        <div class="mb-3  col-md-6">
+                        <div class="mb-3  col-md-4">
                           <select class="form-select" id="report_type" name="report_type" required>
                             <option value="" selected disabled>Select Report Type</option>
                             <option value="Audit Report">Audit Report</option>
                             <option value="Management Letter">Management Letter</option>
                           </select>
                         </div>
-                        <div class="mb-3 col-md-6">
+                        <div class="mb-3 col-md-4">
                           <select class="form-select" id="report_version_type" name="report_version_type" required>
                             <option value="" selected disabled>select Version Type</option>
                             <option value="Draft">Draft</option>
                             <option value="Final">Final</option>
                           </select>
                         </div>
-                        <div class="mb-3 col-md-6 mt-3">
+                        <div class="mb-3 col-md-4">
                           <input type="text" class="form-control" id="report_title" placeholder="Report Title" name="report_title" required>
                         </div>
-                        <div class="mb-3 col-md-6 mt-3">
+                        <div class="mb-3 col-md-12">
                           <textarea class="form-control" id="report_content" placeholder="Report Content" name="report_content" rows="5" required></textarea>
                         </div>
 
-                        <div class="col-md-6">
+                        <div class="col-md-12 text-center">
                           <button type="submit" class="btn btn-primary btn-icon btn-round"><i class="fas fa-save"></i></button>
                         </div>
                       </div>
@@ -254,7 +255,7 @@ $conn->close();
                   </div>
                 </div>
 
-                <div class="mt-4">
+                <div class="mt-4 col-md-12 text-center">
                   <a href="engagement_details.php?engagement_id=<?php echo $engagement_id; ?>" class="btn btn-secondary btn-icon btn-round"><i class="fas fa-arrow-left"></i></a>
                 </div>
               <?php endif; ?>

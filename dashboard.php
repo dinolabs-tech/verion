@@ -316,7 +316,7 @@ $conn->close();
                   <div class="card-head-row">
                     <div class="card-title">Quick Links / Recent Activity</div>
                   </div>
-                  <p class="card-text">More content will go here based on user role and recent activities.</p>
+                  <!-- <p class="card-text">More content will go here based on user role and recent activities.</p> -->
 
                 </div>
 

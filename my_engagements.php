@@ -110,7 +110,7 @@ $conn->close();
                             <td><?php echo htmlspecialchars($engagement['auditor_username'] ?? 'N/A'); ?></td>
                             <td><?php echo htmlspecialchars($engagement['reviewer_username'] ?? 'N/A'); ?></td>
                             <td>
-                              <a href="engagement_details.php?engagement_id=<?= $engagement['engagement_id']; ?>" class="btn btn-sm btn-info btn-icon btn-round"><i class="fas fa-list"></i></a>
+                              <a href="engagement_details.php?engagement_id=<?= $engagement['engagement_id']; ?>" class="btn btn-info btn-icon btn-round"><i class="fas fa-list"></i></a>
                               <!-- More actions for auditor within an engagement -->
                             </td>
                           </tr>

@@ -23,7 +23,7 @@ if ($is_client && $client_id) {
 }
 
 // Fetch Audit Reports
-$audit_reports_query = "SELECT ar.*, e.engagement_year, e.period, c.client_name FROM audit_reports ar JOIN engagements e ON ar.engagement_id = e.engagement_id JOIN clients c ON e.client_id = c.client_id" . $client_filter_clause . " ORDER BY ar.generated_at DESC";
+$audit_reports_query = "SELECT ar.report_id AS report_identifier, ar.*, e.engagement_year, e.period, c.client_name FROM audit_reports ar JOIN engagements e ON ar.engagement_id = e.engagement_id JOIN clients c ON e.client_id = c.client_id" . $client_filter_clause . " ORDER BY ar.generated_at DESC";
 $audit_reports_result = $conn->query($audit_reports_query);
 if ($audit_reports_result) {
   while ($row = $audit_reports_result->fetch_assoc()) {
@@ -33,7 +33,7 @@ if ($audit_reports_result) {
 }
 
 // Fetch Management Letters
-$management_letters_query = "SELECT ml.*, e.engagement_year, e.period, c.client_name FROM management_letters ml JOIN engagements e ON ml.engagement_id = e.engagement_id JOIN clients c ON e.client_id = c.client_id" . $client_filter_clause . " ORDER BY ml.generated_at DESC";
+$management_letters_query = "SELECT ml.letter_id AS report_identifier, ml.*, e.engagement_year, e.period, c.client_name FROM management_letters ml JOIN engagements e ON ml.engagement_id = e.engagement_id JOIN clients c ON e.client_id = c.client_id" . $client_filter_clause . " ORDER BY ml.generated_at DESC";
 $management_letters_result = $conn->query($management_letters_query);
 if ($management_letters_result) {
   while ($row = $management_letters_result->fetch_assoc()) {
@@ -100,7 +100,11 @@ $conn->close();
                             <?php if (!empty($report['file_path'])): ?>
                               <a href="<?php echo htmlspecialchars($report['file_path']); ?>" class="btn btn-sm btn-outline-primary" target="_blank">View</a>
                             <?php else: ?>
-                              <span class="text-muted">No File</span>
+                              <a href="download_report_pdf.php?report_id=<?php echo htmlspecialchars($report['report_identifier']); ?>&report_type=<?php echo urlencode($report['report_type']); ?>" class="btn btn-sm btn-info" target="_blank">Download PDF</a>
+                            <?php endif; ?>
+                            <?php if ($_SESSION['role'] === 'Auditor' || $_SESSION['role'] === 'Admin'): ?>
+                              <a href="edit_report.php?report_id=<?php echo htmlspecialchars($report['report_identifier']); ?>&report_type=<?php echo urlencode($report['report_type']); ?>" class="btn btn-sm btn-warning">Edit</a>
+                              <a href="delete_report.php?report_id=<?php echo htmlspecialchars($report['report_identifier']); ?>&report_type=<?php echo urlencode($report['report_type']); ?>" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure you want to delete this report?');">Delete</a>
                             <?php endif; ?>
                           </td>
                         </tr>

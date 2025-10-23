@@ -6,8 +6,8 @@ require_once 'db_connection.php';
 function createTable($conn, $sql, $tableName)
 {
     if ($conn->query($sql) === TRUE) {
-        echo "Table '$tableName' created successfully or already exists.<br>";
-        return true;
+        // echo "Table '$tableName' created successfully or already exists.<br>";
+        // return true;
     } else {
         echo "Error creating table '$tableName': " . $conn->error . "<br>";
         error_log("Error creating table '$tableName': " . $conn->error);
@@ -47,7 +47,24 @@ $tables = [
                 `last_login` TIMESTAMP NULL,
                 `client_id` INT NULL,
                 `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-                `updated_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+                `updated_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+                `first_name` VARCHAR(255) NULL,
+                `last_name` VARCHAR(255) NULL,
+                `date_of_birth` DATE NULL,
+                `gender` ENUM('Male', 'Female', 'Non-binary', 'Prefer not to say') NULL,
+                `nationality` VARCHAR(255) NULL,
+                `marital_status` ENUM('Single', 'Married', 'Divorced', 'Widowed', 'Prefer not to say') NULL,
+                `phone_number` VARCHAR(100) NULL,
+                `address_street` VARCHAR(255) NULL,
+                `address_city` VARCHAR(255) NULL,
+                `address_state` VARCHAR(255) NULL,
+                `address_zip_code` VARCHAR(20) NULL,
+                `address_country` VARCHAR(255) NULL,
+                `occupation` VARCHAR(255) NULL,
+                `company` VARCHAR(255) NULL,
+                `education_level` ENUM('High School', 'Associate Degree', 'Bachelor\'s Degree', 'Master\'s Degree', 'Doctorate', 'Other') NULL,
+                `time_zone` VARCHAR(100) NULL,
+                `preferred_language` VARCHAR(100) NULL
             ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;"
     ],
     [
@@ -195,7 +212,7 @@ $tables = [
                 `raised_to_user_id` INT NULL, -- Can be client or another auditor/reviewer
                 `query_text` TEXT NOT NULL,
                 `response_text` TEXT,
-                `status` ENUM('Sent', 'Opened', 'Responded') NOT NULL DEFAULT 'Sent',
+                `status` ENUM('Sent', 'Open', 'Responded') NOT NULL DEFAULT 'Sent',
                 `raised_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
                 `responded_at` TIMESTAMP NULL,
                 `closed_at` TIMESTAMP NULL,
@@ -495,5 +512,3 @@ foreach ($tables as $table) {
     createTable($conn, $table['sql'], $table['name']);
 }
 
-// Close the connection
-$conn = null;

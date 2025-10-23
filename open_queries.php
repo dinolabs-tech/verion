@@ -6,7 +6,7 @@ include 'database/db_connection.php';
 // Update status of queries from 'sent' to 'opened' when the receiver opens them
 if (isset($_SESSION['user_id'])) {
   $current_user_id = $_SESSION['user_id'];
-  $update_stmt = $conn->prepare("UPDATE queries SET status = 'opened' WHERE raised_to_user_id = ? AND status = 'sent'");
+  $update_stmt = $conn->prepare("UPDATE queries SET status = 'Open' WHERE raised_to_user_id = ? AND status = 'sent'");
   $update_stmt->bind_param("i", $current_user_id);
   $update_stmt->execute();
   $update_stmt->close();
@@ -52,8 +52,8 @@ if (isset($_SESSION['user_id'])) {
                 $_SESSION['message_type'] = "danger";
               }
               $stmt->close();
-              header("Location:open_queries.php");
-              exit();
+              // header("Location:open_queries.php");
+              // exit();
             } else {
               $_SESSION['message'] = "Please fill in all fields to raise a query.";
               $_SESSION['message_type'] = "warning";

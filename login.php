@@ -1,7 +1,7 @@
 <?php
 session_start();
 require_once 'database/db_connection.php';
-// require_once 'database/database_schema.php';
+require_once 'database/database_schema.php';
 
 // Check if the default admin user exists, and create it if it doesn't
 $admin_username = 'dinolabs';

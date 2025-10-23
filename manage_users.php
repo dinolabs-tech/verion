@@ -21,6 +21,26 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $status = $_POST['status'] ?? '';
     $client_id = $_POST['client_id'] ?? NULL;
 
+    // New fields
+    $first_name = $_POST['first_name'] ?? NULL;
+    $last_name = $_POST['last_name'] ?? NULL;
+    $date_of_birth = $_POST['date_of_birth'] ?? NULL;
+    $gender = $_POST['gender'] ?? NULL;
+    $nationality = $_POST['nationality'] ?? NULL;
+    $marital_status = $_POST['marital_status'] ?? NULL;
+    $phone_number = $_POST['phone_number'] ?? NULL;
+    $address_street = $_POST['address_street'] ?? NULL;
+    $address_city = $_POST['address_city'] ?? NULL;
+    $address_state = $_POST['address_state'] ?? NULL;
+    $address_zip_code = $_POST['address_zip_code'] ?? NULL;
+    $address_country = $_POST['address_country'] ?? NULL;
+    $occupation = $_POST['occupation'] ?? NULL;
+    $company = $_POST['company'] ?? NULL;
+    $education_level = $_POST['education_level'] ?? NULL;
+    $time_zone = $_POST['time_zone'] ?? NULL;
+    $preferred_language = $_POST['preferred_language'] ?? NULL;
+
+
     if (empty($username) || empty($email) || empty($role) || empty($status)) {
       $error_message = "All fields are required.";
     } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
@@ -36,8 +56,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $error_message = "Username or email already exists for another user.";
       } else {
         $stmt->close();
-        $stmt = $conn->prepare("UPDATE users SET username = ?, email = ?, role = ?, status = ?, client_id = ? WHERE user_id = ?");
-        $stmt->bind_param("ssssii", $username, $email, $role, $status, $client_id, $user_id);
+        $stmt = $conn->prepare("UPDATE users SET username = ?, email = ?, role = ?, status = ?, client_id = ?, first_name = ?, last_name = ?, date_of_birth = ?, gender = ?, nationality = ?, marital_status = ?, phone_number = ?, address_street = ?, address_city = ?, address_state = ?, address_zip_code = ?, address_country = ?, occupation = ?, company = ?, education_level = ?, time_zone = ?, preferred_language = ? WHERE user_id = ?");
+        $stmt->bind_param("ssssissssssssssssssssis", $username, $email, $role, $status, $client_id, $first_name, $last_name, $date_of_birth, $gender, $nationality, $marital_status, $phone_number, $address_street, $address_city, $address_state, $address_zip_code, $address_country, $occupation, $company, $education_level, $time_zone, $preferred_language, $user_id);
 
         if ($stmt->execute()) {
           $success_message = "User updated successfully!";
@@ -179,6 +199,23 @@ $conn->close();
                         <th>Role</th>
                         <th>Status</th>
                         <th>Client</th>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Date of Birth</th>
+                        <th>Gender</th>
+                        <th>Nationality</th>
+                        <th>Marital Status</th>
+                        <th>Phone Number</th>
+                        <th>Street</th>
+                        <th>City</th>
+                        <th>State</th>
+                        <th>Zip Code</th>
+                        <th>Country</th>
+                        <th>Occupation</th>
+                        <th>Company</th>
+                        <th>Education Level</th>
+                        <th>Time Zone</th>
+                        <th>Preferred Language</th>
                         <th>Actions</th>
                       </tr>
                     </thead>
@@ -191,6 +228,23 @@ $conn->close();
                           <td><?php echo htmlspecialchars($user['role']); ?></td>
                           <td><?php echo htmlspecialchars($user['status']); ?></td>
                           <td><?php echo htmlspecialchars($user['client_name'] ?? 'N/A'); ?></td>
+                          <td><?php echo htmlspecialchars($user['first_name'] ?? 'N/A'); ?></td>
+                          <td><?php echo htmlspecialchars($user['last_name'] ?? 'N/A'); ?></td>
+                          <td><?php echo htmlspecialchars($user['date_of_birth'] ?? 'N/A'); ?></td>
+                          <td><?php echo htmlspecialchars($user['gender'] ?? 'N/A'); ?></td>
+                          <td><?php echo htmlspecialchars($user['nationality'] ?? 'N/A'); ?></td>
+                          <td><?php echo htmlspecialchars($user['marital_status'] ?? 'N/A'); ?></td>
+                          <td><?php echo htmlspecialchars($user['phone_number'] ?? 'N/A'); ?></td>
+                          <td><?php echo htmlspecialchars($user['address_street'] ?? 'N/A'); ?></td>
+                          <td><?php echo htmlspecialchars($user['address_city'] ?? 'N/A'); ?></td>
+                          <td><?php echo htmlspecialchars($user['address_state'] ?? 'N/A'); ?></td>
+                          <td><?php echo htmlspecialchars($user['address_zip_code'] ?? 'N/A'); ?></td>
+                          <td><?php echo htmlspecialchars($user['address_country'] ?? 'N/A'); ?></td>
+                          <td><?php echo htmlspecialchars($user['occupation'] ?? 'N/A'); ?></td>
+                          <td><?php echo htmlspecialchars($user['company'] ?? 'N/A'); ?></td>
+                          <td><?php echo htmlspecialchars($user['education_level'] ?? 'N/A'); ?></td>
+                          <td><?php echo htmlspecialchars($user['time_zone'] ?? 'N/A'); ?></td>
+                          <td><?php echo htmlspecialchars($user['preferred_language'] ?? 'N/A'); ?></td>
                           <td class="d-flex">
                             <button type="button" class=" btn-primary edit-user-btn btn-icon btn-round text-white me-1 ps-1" data-bs-toggle="modal" data-bs-target="#editUserModal"
                               data-id="<?php echo $user['user_id']; ?>"
@@ -198,7 +252,24 @@ $conn->close();
                               data-email="<?php echo htmlspecialchars($user['email']); ?>"
                               data-role="<?php echo htmlspecialchars($user['role']); ?>"
                               data-status="<?php echo htmlspecialchars($user['status']); ?>"
-                              data-client-id="<?php echo htmlspecialchars($user['client_id']); ?>">
+                              data-client-id="<?php echo htmlspecialchars($user['client_id']); ?>"
+                              data-first-name="<?php echo htmlspecialchars($user['first_name']); ?>"
+                              data-last-name="<?php echo htmlspecialchars($user['last_name']); ?>"
+                              data-date-of-birth="<?php echo htmlspecialchars($user['date_of_birth']); ?>"
+                              data-gender="<?php echo htmlspecialchars($user['gender']); ?>"
+                              data-nationality="<?php echo htmlspecialchars($user['nationality']); ?>"
+                              data-marital-status="<?php echo htmlspecialchars($user['marital_status']); ?>"
+                              data-phone-number="<?php echo htmlspecialchars($user['phone_number']); ?>"
+                              data-address-street="<?php echo htmlspecialchars($user['address_street']); ?>"
+                              data-address-city="<?php echo htmlspecialchars($user['address_city']); ?>"
+                              data-address-state="<?php echo htmlspecialchars($user['address_state']); ?>"
+                              data-address-zip-code="<?php echo htmlspecialchars($user['address_zip_code']); ?>"
+                              data-address-country="<?php echo htmlspecialchars($user['address_country']); ?>"
+                              data-occupation="<?php echo htmlspecialchars($user['occupation']); ?>"
+                              data-company="<?php echo htmlspecialchars($user['company']); ?>"
+                              data-education-level="<?php echo htmlspecialchars($user['education_level']); ?>"
+                              data-time-zone="<?php echo htmlspecialchars($user['time_zone']); ?>"
+                              data-preferred-language="<?php echo htmlspecialchars($user['preferred_language']); ?>">
                               <i class="fa fa-edit"></i>
                             </button>
                             <a href="manage_users.php?delete_id=<?php echo $user['user_id']; ?>" class=" text-white btn-danger btn-icon btn-round" onclick="return confirm('Are you sure you want to delete this user?');"><i class="icon fas fa-trash"></i></a>
@@ -233,6 +304,82 @@ $conn->close();
                 </div>
                 <div class="mb-3">
                   <input type="email" placeholder="Email" class="form-control" id="edit_email" name="email">
+                </div>
+                <div class="mb-3">
+                  <input type="text" class="form-control" placeholder="First Name" id="edit_first_name" name="first_name">
+                </div>
+                <div class="mb-3">
+                  <input type="text" class="form-control" placeholder="Last Name" id="edit_last_name" name="last_name">
+                </div>
+                <div class="mb-3">
+                  <label for="edit_date_of_birth" class="form-label">Date of Birth</label>
+                  <input type="date" class="form-control" id="edit_date_of_birth" name="date_of_birth">
+                </div>
+                <div class="mb-3">
+                  <label for="edit_gender" class="form-label">Gender</label>
+                  <select class="form-control" id="edit_gender" name="gender">
+                    <option value="">Select Gender</option>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                    <option value="Non-binary">Non-binary</option>
+                    <option value="Prefer not to say">Prefer not to say</option>
+                  </select>
+                </div>
+                <div class="mb-3">
+                  <input type="text" class="form-control" placeholder="Nationality" id="edit_nationality" name="nationality">
+                </div>
+                <div class="mb-3">
+                  <label for="edit_marital_status" class="form-label">Marital Status</label>
+                  <select class="form-control" id="edit_marital_status" name="marital_status">
+                    <option value="">Select Marital Status</option>
+                    <option value="Single">Single</option>
+                    <option value="Married">Married</option>
+                    <option value="Divorced">Divorced</option>
+                    <option value="Widowed">Widowed</option>
+                    <option value="Prefer not to say">Prefer not to say</option>
+                  </select>
+                </div>
+                <div class="mb-3">
+                  <input type="text" class="form-control" placeholder="Phone Number" id="edit_phone_number" name="phone_number">
+                </div>
+                <div class="mb-3">
+                  <input type="text" class="form-control" placeholder="Street Address" id="edit_address_street" name="address_street">
+                </div>
+                <div class="mb-3">
+                  <input type="text" class="form-control" placeholder="City" id="edit_address_city" name="address_city">
+                </div>
+                <div class="mb-3">
+                  <input type="text" class="form-control" placeholder="State/Province" id="edit_address_state" name="address_state">
+                </div>
+                <div class="mb-3">
+                  <input type="text" class="form-control" placeholder="Zip Code" id="edit_address_zip_code" name="address_zip_code">
+                </div>
+                <div class="mb-3">
+                  <input type="text" class="form-control" placeholder="Country" id="edit_address_country" name="address_country">
+                </div>
+                <div class="mb-3">
+                  <input type="text" class="form-control" placeholder="Occupation" id="edit_occupation" name="occupation">
+                </div>
+                <div class="mb-3">
+                  <input type="text" class="form-control" placeholder="Company" id="edit_company" name="company">
+                </div>
+                <div class="mb-3">
+                  <label for="edit_education_level" class="form-label">Education Level</label>
+                  <select class="form-control" id="edit_education_level" name="education_level">
+                    <option value="">Select Education Level</option>
+                    <option value="High School">High School</option>
+                    <option value="Associate Degree">Associate Degree</option>
+                    <option value="Bachelor's Degree">Bachelor's Degree</option>
+                    <option value="Master's Degree">Master's Degree</option>
+                    <option value="Doctorate">Doctorate</option>
+                    <option value="Other">Other</option>
+                  </select>
+                </div>
+                <div class="mb-3">
+                  <input type="text" class="form-control" placeholder="Time Zone" id="edit_time_zone" name="time_zone">
+                </div>
+                <div class="mb-3">
+                  <input type="text" class="form-control" placeholder="Preferred Language" id="edit_preferred_language" name="preferred_language">
                 </div>
                 <div class="mb-3">
                   <select class="form-control" id="edit_role" name="role">
@@ -281,6 +428,24 @@ $conn->close();
       var role = button.data('role');
       var status = button.data('status');
       var clientId = button.data('client-id');
+      var firstName = button.data('first-name');
+      var lastName = button.data('last-name');
+      var dateOfBirth = button.data('date-of-birth');
+      var gender = button.data('gender');
+      var nationality = button.data('nationality');
+      var maritalStatus = button.data('marital-status');
+      var phoneNumber = button.data('phone-number');
+      var addressStreet = button.data('address-street');
+      var addressCity = button.data('address-city');
+      var addressState = button.data('address-state');
+      var addressZipCode = button.data('address-zip-code');
+      var addressCountry = button.data('address-country');
+      var occupation = button.data('occupation');
+      var company = button.data('company');
+      var educationLevel = button.data('education-level');
+      var timeZone = button.data('time-zone');
+      var preferredLanguage = button.data('preferred-language');
+
 
       var modal = $(this);
       modal.find('.modal-title').text('Edit User: ' + username);
@@ -289,6 +454,24 @@ $conn->close();
       modal.find('#edit_email').val(email);
       modal.find('#edit_role').val(role);
       modal.find('#edit_status').val(status);
+      modal.find('#edit_first_name').val(firstName);
+      modal.find('#edit_last_name').val(lastName);
+      modal.find('#edit_date_of_birth').val(dateOfBirth);
+      modal.find('#edit_gender').val(gender);
+      modal.find('#edit_nationality').val(nationality);
+      modal.find('#edit_marital_status').val(maritalStatus);
+      modal.find('#edit_phone_number').val(phoneNumber);
+      modal.find('#edit_address_street').val(addressStreet);
+      modal.find('#edit_address_city').val(addressCity);
+      modal.find('#edit_address_state').val(addressState);
+      modal.find('#edit_address_zip_code').val(addressZipCode);
+      modal.find('#edit_address_country').val(addressCountry);
+      modal.find('#edit_occupation').val(occupation);
+      modal.find('#edit_company').val(company);
+      modal.find('#edit_education_level').val(educationLevel);
+      modal.find('#edit_time_zone').val(timeZone);
+      modal.find('#edit_preferred_language').val(preferredLanguage);
+
 
       var clientIdField = modal.find('#edit_client_id_field');
       var clientIdSelect = modal.find('#edit_client_id');

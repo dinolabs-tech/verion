@@ -140,7 +140,7 @@ $conn->close();
                           <td><?php echo htmlspecialchars($engagement['auditor_username'] ?? 'N/A'); ?></td>
                           <td><?php echo htmlspecialchars($engagement['reviewer_username'] ?? 'N/A'); ?></td>
                           <td>
-                            <a href="review_engagement_details.php?engagement_id=<?php echo $engagement['engagement_id']; ?>" class="btn btn-sm btn-info btn-icon btn-round"><i class="fas fa-list"></i></a>
+                            <a href="review_engagement_details.php?engagement_id=<?php echo $engagement['engagement_id']; ?>" class="btn btn-info btn-icon btn-round"><i class="fas fa-list"></i></a>
                           </td>
                         </tr>
                       <?php endforeach; ?>

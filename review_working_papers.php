@@ -145,7 +145,7 @@ $conn->close();
                                   <?php endif; ?>
                                 </td>
                                 <td>
-                                  <button type="button" class="btn  btn-primary btn-icon btn-round" data-bs-toggle="modal" data-bs-target="#reviewWorkingPaperModal"
+                                  <button type="button" class="btn btn-primary btn-icon btn-round" data-bs-toggle="modal" data-bs-target="#reviewWorkingPaperModal"
                                     data-id="<?php echo $paper['paper_id']; ?>"
                                     data-title="<?php echo htmlspecialchars($paper['title']); ?>"
                                     data-description="<?php echo htmlspecialchars($paper['description']); ?>"

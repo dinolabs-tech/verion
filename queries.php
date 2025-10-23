@@ -74,11 +74,32 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $engagement) {
           $error_message = "Query not found or you do not have permission to edit it.";
         } else {
           $can_edit_full = in_array($current_user_role, ['Auditor', 'Admin']);
-          $can_respond = (in_array($current_user_role, ['Client', 'Reviewer']) && $current_user_id == $existing_query['raised_to_user_id']);
+          $can_respond = (in_array($current_user_role, ['Client', 'Reviewer', 'Auditor']) && $current_user_id == $existing_query['raised_to_user_id']);
 
           if ($can_edit_full) {
             // Auditors and Admins can edit all fields
-            $stmt = $conn->prepare("UPDATE queries SET query_text = ?, raised_to_user_id = ?, response_text = ?, status = ?, responded_at = CASE WHEN ? = 'Responded' AND response_text IS NOT NULL THEN CURRENT_TIMESTAMP ELSE responded_at END, closed_at = CASE WHEN ? = 'Closed' THEN CURRENT_TIMESTAMP ELSE closed_at END WHERE query_id = ? AND engagement_id = ?");
+            // Fetch the original status to handle clearing responses
+            $stmt_original_status = $conn->prepare("SELECT status FROM queries WHERE query_id = ?");
+            $stmt_original_status->bind_param("i", $query_id);
+            $stmt_original_status->execute();
+            $result_original_status = $stmt_original_status->get_result();
+            $original_query_status = $result_original_status->fetch_assoc()['status'] ?? 'sent';
+            $stmt_original_status->close();
+
+            // Determine the new status based on response_text
+            if (!empty($response_text)) {
+                // If a response is provided, set status to 'Responded'
+                $status = 'Responded';
+            } else {
+                // If response_text is empty, and the query was previously responded, revert status to 'Open'
+                if ($original_query_status === 'Responded') {
+                    $status = 'Open';
+                } else {
+                    $status = $original_query_status; // Keep original status if not 'Responded'
+                }
+            }
+
+            $stmt = $conn->prepare("UPDATE queries SET query_text = ?, raised_to_user_id = ?, response_text = ?, status = ?, responded_at = CASE WHEN ? = 'Responded' THEN CURRENT_TIMESTAMP ELSE responded_at END, closed_at = CASE WHEN ? = 'Closed' THEN CURRENT_TIMESTAMP ELSE closed_at END WHERE query_id = ? AND engagement_id = ?");
             $stmt->bind_param("sisssiis", $query_text, $raised_to_user_id, $response_text, $status, $status, $status, $query_id, $engagement_id);
           } elseif ($can_respond) {
             // Clients and Reviewers can only update response_text and status for queries raised to them
@@ -315,7 +336,7 @@ $conn->close();
                                     <?php } ?>
                                   <?php endif; ?>
                                   <?php if (in_array($_SESSION['role'], ['Auditor', 'Admin'])): ?>
-                                    <a href="queries.php?engagement_id=<?php echo $engagement_id; ?>&delete_id=<?php echo $query['query_id']; ?>" class=" text-white btn btn-icon btn-round btn-danger" onclick="return confirm('Are you sure you want to delete this query?');"><i class="fas fa-trash"></i></a>
+                                    <!-- <a href="queries.php?engagement_id=<?php echo $engagement_id; ?>&delete_id=<?php echo $query['query_id']; ?>" class=" text-white btn btn-icon btn-round btn-danger" onclick="return confirm('Are you sure you want to delete this query?');"><i class="fas fa-trash"></i></a> -->
                                   <?php endif; ?>
                                 </td>
                               </tr>

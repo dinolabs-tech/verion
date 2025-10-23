@@ -76,41 +76,107 @@ $conn->close();
 
                 <hr>
 
-                <h3>Review Modules</h3>
-                <div class="list-group">
-                  <a href="review_working_papers.php?engagement_id=<?php echo $engagement_id; ?>" class="list-group-item list-group-item-action">
-                    <i class="bi bi-file-earmark-text me-2"></i> Review Working Papers
-                  </a>
-                  <a href="review_audit_adjustments.php?engagement_id=<?php echo $engagement_id; ?>" class="list-group-item list-group-item-action">
-                    <i class="bi bi-pencil-square me-2 "></i> Review Audit Adjustments
-                  </a>
+                <h3 class="text-center">Review Modules</h3>
+           
+                <div class="row">
+                  <div class="col-md-4">
+                    <a href="review_working_papers.php?engagement_id=<?php echo $engagement_id; ?>" class="list-group-item list-group-item-action">
+                      <div class="card shadow bg-secondary text-white card-hover">
+                        <div class="card-body">
+                          <i class="fas fa-solid fa-paperclip me-2"></i> Review Working Papers
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+
+                  <div class="col-md-4">
+                    <a href="review_audit_adjustments.php?engagement_id=<?php echo $engagement_id; ?>" class="list-group-item list-group-item-action">
+                      <div class="card shadow bg-primary text-white card-hover">
+                        <div class="card-body">
+                          <i class="fas fa-solid fa-bullseye me-2"></i> Review Audit Adjustments
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+
+                  <div class="col-md-4">
+                    <a href="review_risk_assessment.php?engagement_id=<?php echo $engagement_id; ?>" class="list-group-item list-group-item-action">
+                      <div class="card shadow bg-success text-white">
+                        <div class="card-body">
+                          <i class="fas fa-exclamation-triangle me-2"></i> Review Risk Assessment
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+
                   <!-- <a href="review_queries.php?engagement_id=<?php echo $engagement_id; ?>" class="list-group-item list-group-item-action">
                             <i class="bi bi-question-circle me-2"></i> Review Queries & Responses
                         </a> -->
-                  <a href="review_risk_assessment.php?engagement_id=<?php echo $engagement_id; ?>" class="list-group-item list-group-item-action">
-                    <i class="bi bi-shield-fill-exclamation me-2"></i> Review Risk Assessment
-                  </a>
-                  <a href="review_materiality_calculations.php?engagement_id=<?php echo $engagement_id; ?>" class="list-group-item list-group-item-action">
-                    <i class="bi bi-calculator me-2"></i> Review Materiality Calculations
-                  </a>
-                  <a href="review_reconciliations.php?engagement_id=<?php echo $engagement_id; ?>" class="list-group-item list-group-item-action">
-                    <i class="bi bi-arrow-repeat me-2"></i> Review Reconciliations
-                  </a>
-                  <a href="review_exception_reports.php?engagement_id=<?php echo $engagement_id; ?>" class="list-group-item list-group-item-action">
-                    <i class="bi bi-exclamation-triangle me-2"></i> Review Exception Reports
-                  </a>
-                  <a href="approve_reports.php?engagement_id=<?php echo $engagement_id; ?>" class="list-group-item list-group-item-action">
-                    <i class="bi bi-check-circle me-2"></i> Approve Reports
-                  </a>
-                  <a href="review_compliance_checklists.php?engagement_id=<?php echo $engagement_id; ?>" class="list-group-item list-group-item-action">
-                    <i class="bi bi-check-square me-2"></i> Review Compliance Checklists
-                  </a>
-                  <a href="review_internal_controls.php?engagement_id=<?php echo $engagement_id; ?>" class="list-group-item list-group-item-action">
-                    <i class="bi bi-lock me-2"></i> Review Internal Controls
-                  </a>
+
+                  <div class="col-md-4">
+                    <a href="review_materiality_calculations.php?engagement_id=<?php echo $engagement_id; ?>" class="list-group-item list-group-item-action">
+                      <div class="card shadow bg-warning">
+                        <div class="card-body">
+                          <i class="fas fa-solid fa-calculator me-2"></i> Review Materiality Calculations
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+
+                  <div class="col-md-4">
+                    <a href="review_reconciliations.php?engagement_id=<?php echo $engagement_id; ?>" class="list-group-item list-group-item-action">
+                      <div class="card shadow bg-secondary text-white">
+                        <div class="card-body">
+                          <i class="fas fa-sync-alt me-2"></i> Review Reconciliations
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+
+                  <div class="col-md-4">
+                    <a href="review_exception_reports.php?engagement_id=<?php echo $engagement_id; ?>" class="list-group-item list-group-item-action">
+                      <div class="card shadow bg-primary text-white">
+                        <div class="card-body">
+                          <i class="fas fa-exclamation-circle me-2"></i> Review Exception Reports
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+
+                  <div class="col-md-4">
+                    <a href="approve_reports.php?engagement_id=<?php echo $engagement_id; ?>" class="list-group-item list-group-item-action">
+                      <div class="card shadow bg-success text-white">
+                        <div class="card-body">
+                          <i class="fas fa-file-signature me-2"></i> Approve Reports
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+
+                  <div class="col-md-4">
+                    <a href="review_compliance_checklists.php?engagement_id=<?php echo $engagement_id; ?>" class="list-group-item list-group-item-action">
+                      <div class="card shadow bg-warning">
+                        <div class="card-body">
+                          <i class="fas fa-list-ol me-2"></i> Review Compliance Checklists
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+
+
+                  <div class="col-md-4">
+                    <a href="review_internal_controls.php?engagement_id=<?php echo $engagement_id; ?>" class="list-group-item list-group-item-action">
+                      <div class="card shadow bg-secondary text-white">
+                        <div class="card-body">
+                          <i class="fas fa-shield-alt me-2"></i> Review Internal Controls
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+
                 </div>
 
-                <div class="mt-4">
+                <div class="mt-4 col-md-12 text-center">
                   <a href="engagements_for_review.php" class="btn btn-secondary btn-icon btn-round"><i class="fas fa-arrow-left"></i></a>
                 </div>
               <?php endif; ?>
