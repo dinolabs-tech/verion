@@ -308,6 +308,7 @@ $tables = [
                 `generated_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
                 `approved_by_user_id` INT NULL,
                 `approved_at` TIMESTAMP NULL,
+                `reviewer_approved` BOOLEAN DEFAULT FALSE,
                 FOREIGN KEY (`engagement_id`) REFERENCES `engagements`(`engagement_id`) ON DELETE CASCADE,
                 FOREIGN KEY (`generated_by_user_id`) REFERENCES `users`(`user_id`) ON DELETE CASCADE,
                 FOREIGN KEY (`approved_by_user_id`) REFERENCES `users`(`user_id`) ON DELETE SET NULL
@@ -327,6 +328,7 @@ $tables = [
                 `generated_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
                 `approved_by_user_id` INT NULL,
                 `approved_at` TIMESTAMP NULL,
+                `reviewer_approved` BOOLEAN DEFAULT FALSE,
                 FOREIGN KEY (`engagement_id`) REFERENCES `engagements`(`engagement_id`) ON DELETE CASCADE,
                 FOREIGN KEY (`generated_by_user_id`) REFERENCES `users`(`user_id`) ON DELETE CASCADE,
                 FOREIGN KEY (`approved_by_user_id`) REFERENCES `users`(`user_id`) ON DELETE SET NULL
@@ -511,4 +513,3 @@ $tables = [
 foreach ($tables as $table) {
     createTable($conn, $table['sql'], $table['name']);
 }
-
