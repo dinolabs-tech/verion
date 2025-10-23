@@ -211,8 +211,8 @@ $conn->close();
                     <p><strong>Total Expenses:</strong> <?php echo htmlspecialchars(number_format($total_expenses, 2)); ?></p>
                     <p><strong>Net Profit:</strong> <?php echo htmlspecialchars(number_format($net_profit, 2)); ?></p>
                     <hr>
-                    <h5>Cash Flow Statement (Simplified - Placeholder)</h5>
-                    <p>Cash Flow Statement generation is complex and typically requires detailed ledger entries categorized into operating, investing, and financing activities. This is a placeholder for future development.</p>
+                    <!-- <h5>Cash Flow Statement (Simplified - Placeholder)</h5>
+                    <p>Cash Flow Statement generation is complex and typically requires detailed ledger entries categorized into operating, investing, and financing activities. This is a placeholder for future development.</p> -->
                   </div>
                 </div>
 
