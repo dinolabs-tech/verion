@@ -14,7 +14,7 @@ require_once 'database/db_connection.php';
  * Check if the user is logged in and has the necessary role (Auditor or Admin).
  * If not, redirect to the login page.
  */
-if (!isset($_SESSION['user_id']) || ($_SESSION['role'] !== 'Auditor' && $_SESSION['role'] !== 'Admin')) {
+if (!isset($_SESSION['user_id']) || ($_SESSION['role'] !== 'Auditor' && $_SESSION['role'] !== 'Admin' && $_SESSION['role'] !== 'Client' && $_SESSION['role'] !== 'Reviewer' && $_SESSION['role'] !== 'Superuser')) {
   header("Location: login.php");
   exit();
 }

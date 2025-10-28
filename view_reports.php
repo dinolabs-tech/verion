@@ -3,7 +3,7 @@ session_start();
 require_once 'database/db_connection.php';
 
 // Only Auditor or Admin can access this page
-if (!isset($_SESSION['user_id']) || ($_SESSION['role'] !== 'Auditor' && $_SESSION['role'] !== 'Admin' && $_SESSION['role'] !== 'Client')) {
+if (!isset($_SESSION['user_id']) || ($_SESSION['role'] !== 'Auditor' && $_SESSION['role'] !== 'Admin' && $_SESSION['role'] !== 'Client' && $_SESSION['role'] !== 'Superuser')) {
   header("Location: login.php");
   exit();
 }
@@ -102,7 +102,7 @@ $conn->close();
                             <?php else: ?>
                               <a href="download_report_pdf.php?report_id=<?php echo htmlspecialchars($report['report_identifier']); ?>&report_type=<?php echo urlencode($report['report_type']); ?>" class="btn btn-sm btn-info" target="_blank">Download PDF</a>
                             <?php endif; ?>
-                            <?php if ($_SESSION['role'] === 'Auditor' || $_SESSION['role'] === 'Admin'): ?>
+                            <?php if ($_SESSION['role'] === 'Auditor' || $_SESSION['role'] === 'Admin' || $_SESSION['role'] === 'Superuser'): ?>
                               <a href="edit_report.php?report_id=<?php echo htmlspecialchars($report['report_identifier']); ?>&report_type=<?php echo urlencode($report['report_type']); ?>" class="btn btn-sm btn-warning">Edit</a>
                               <a href="delete_report.php?report_id=<?php echo htmlspecialchars($report['report_identifier']); ?>&report_type=<?php echo urlencode($report['report_type']); ?>" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure you want to delete this report?');">Delete</a>
                             <?php endif; ?>

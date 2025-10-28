@@ -3,7 +3,7 @@ session_start();
 require_once 'database/db_connection.php';
 
 // Only Admin can access this page
-if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'Admin') {
+if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'Admin' && $_SESSION['role'] !== 'Superuser') {
   header("Location: login.php");
   exit();
 }
@@ -87,7 +87,7 @@ if (isset($_GET['delete_id'])) {
 
 // Fetch all users with their assigned client names
 $users = [];
-$result = $conn->query("SELECT u.*, c.client_name FROM users u LEFT JOIN clients c ON u.client_id = c.client_id ORDER BY u.username");
+$result = $conn->query("SELECT u.*, c.client_name FROM users u LEFT JOIN clients c ON u.client_id = c.client_id WHERE u.role != 'Superuser' ORDER BY u.username");
 if ($result) {
   while ($row = $result->fetch_assoc()) {
     $users[] = $row;

@@ -3,7 +3,7 @@ session_start();
 require_once 'database/db_connection.php';
 
 // Only Auditor or Admin can access this page
-if (!isset($_SESSION['user_id']) || !in_array($_SESSION['role'], ['Auditor', 'Admin', 'Client', 'Reviewer'])) {
+if (!isset($_SESSION['user_id']) || !in_array($_SESSION['role'], ['Auditor', 'Admin', 'Client', 'Reviewer', 'Superuser'])) {
   header("Location: login.php");
   exit();
 }
@@ -73,11 +73,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $engagement) {
         if (!$existing_query) {
           $error_message = "Query not found or you do not have permission to edit it.";
         } else {
-          $can_edit_full = in_array($current_user_role, ['Auditor', 'Admin']);
+          $can_edit_full = in_array($current_user_role, ['Auditor', 'Admin', 'Superuser']);
           $can_respond = (in_array($current_user_role, ['Client', 'Reviewer', 'Auditor']) && $current_user_id == $existing_query['raised_to_user_id']);
 
           if ($can_edit_full) {
-            // Auditors and Admins can edit all fields
+            // Auditors, Admins, and Superusers can edit all fields
             // Fetch the original status to handle clearing responses
             $stmt_original_status = $conn->prepare("SELECT status FROM queries WHERE query_id = ?");
             $stmt_original_status->bind_param("i", $query_id);
@@ -232,7 +232,7 @@ $conn->close();
                   </div>
                 <?php endif; ?>
 
-                <?php if (in_array($_SESSION['role'], ['Auditor', 'Admin'])): ?>
+                <?php if (in_array($_SESSION['role'], ['Auditor', 'Admin', 'Superuser'])): ?>
                   <!-- Raise New Query Form -->
                   <div class="card mb-4">
                     <div class="card-header">
@@ -317,7 +317,7 @@ $conn->close();
                                 <td class="d-flex">
                                   <?php
                                   $can_edit_respond = false;
-                                  if (in_array($_SESSION['role'], ['Auditor', 'Admin'])) {
+                                  if (in_array($_SESSION['role'], ['Auditor', 'Admin', 'Superuser'])) {
                                     $can_edit_respond = true;
                                   } elseif (in_array($_SESSION['role'], ['Client', 'Reviewer']) && $_SESSION['user_id'] == $query['raised_to_user_id']) {
                                     $can_edit_respond = true;
@@ -335,7 +335,7 @@ $conn->close();
                                       </button>
                                     <?php } ?>
                                   <?php endif; ?>
-                                  <?php if (in_array($_SESSION['role'], ['Auditor', 'Admin'])): ?>
+                                  <?php if (in_array($_SESSION['role'], ['Auditor', 'Admin', 'Superuser'])): ?>
                                     <!-- <a href="queries.php?engagement_id=<?php echo $engagement_id; ?>&delete_id=<?php echo $query['query_id']; ?>" class=" text-white btn btn-icon btn-round btn-danger" onclick="return confirm('Are you sure you want to delete this query?');"><i class="fas fa-trash"></i></a> -->
                                   <?php endif; ?>
                                 </td>
@@ -352,7 +352,7 @@ $conn->close();
                   <div class="mt-4">
                     <a href="open_queries.php" class="btn btn-secondary btn-icon btn-round"><i class="fas fa-arrow-left"></i></a>
                   </div>
-                <?php } elseif ($_SESSION['role'] == 'Auditor' || $_SESSION['role'] == 'Admin') { ?>
+                <?php } elseif ($_SESSION['role'] == 'Auditor' || $_SESSION['role'] == 'Admin' || $_SESSION['role'] == 'Superuser') { ?>
                   <div class="mt-4">
                     <a href="engagement_details.php?engagement_id=<?php echo $engagement_id; ?>" class="btn btn-secondary btn-icon btn-round"><i class="fas fa-arrow-left"></i></a>
                   </div>

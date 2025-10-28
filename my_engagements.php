@@ -3,7 +3,7 @@ session_start();
 require_once 'database/db_connection.php';
 
 // Only Auditor or Admin can access this page
-if (!isset($_SESSION['user_id']) || ($_SESSION['role'] !== 'Auditor' && $_SESSION['role'] !== 'Admin')) {
+if (!isset($_SESSION['user_id']) || ($_SESSION['role'] !== 'Auditor' && $_SESSION['role'] !== 'Admin' && $_SESSION['role'] !== 'Superuser')) {
   header("Location: login.php");
   exit();
 }
@@ -27,8 +27,8 @@ if ($user_role === 'Auditor') {
         ORDER BY e.engagement_year DESC, c.client_name
     ");
   $stmt->bind_param("i", $user_id);
-} elseif ($user_role === 'Admin') {
-  // Admin can see all engagements
+} elseif ($user_role === 'Admin' || $user_role === 'Superuser') {
+  // Admin and Superuser can see all engagements
   $stmt = $conn->prepare("
         SELECT e.*, c.client_name,
                ua.username AS auditor_username,
@@ -69,8 +69,8 @@ $conn->close();
             <div class="row">
               <div class="col-12">
                 <h1 class="mb-4">My Engagements</h1>
-                <?php if ($user_role === 'Admin'): ?>
-                  <p class="alert alert-info">As an Admin, you see all engagements. Auditors only see their assigned engagements.</p>
+                <?php if ($user_role === 'Admin' || $user_role === 'Superuser'): ?>
+                  <p class="alert alert-info">As an Admin or Superuser, you see all engagements. Auditors only see their assigned engagements.</p>
                 <?php endif; ?>
               </div>
             </div>

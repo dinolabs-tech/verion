@@ -103,8 +103,8 @@ if (isset($_SESSION['user_id'])) {
               $engagements[] = $row;
             }
             $stmt_engagements->close();
-          } elseif ($user_role === 'Auditor' || $user_role === 'Admin') {
-            // Auditors and Admins can see all engagements
+          } elseif ($user_role === 'Auditor' || $user_role === 'Admin' || $user_role === 'Superuser') {
+            // Auditors, Admins, and Superusers can see all engagements
             $result_engagements = $conn->query("SELECT engagement_id, engagement_name FROM engagements");
             while ($row = $result_engagements->fetch_assoc()) {
               $engagements[] = $row;
@@ -266,7 +266,7 @@ if (isset($_SESSION['user_id'])) {
                                         <td>
                                             <?php
                                             $can_edit_respond = false;
-                                            if (in_array($_SESSION['role'], ['Auditor', 'Admin'])) {
+                                            if (in_array($_SESSION['role'], ['Auditor', 'Admin', 'Superuser'])) {
                                               $can_edit_respond = true;
                                             } elseif (in_array($_SESSION['role'], ['Client', 'Reviewer']) && $_SESSION['user_id'] == $query['raised_to_user_id']) {
                                               $can_edit_respond = true;
@@ -282,7 +282,7 @@ if (isset($_SESSION['user_id'])) {
                                                     Edit/Respond
                                                 </button>
                                             <?php endif; ?>
-                                            <?php if (in_array($_SESSION['role'], ['Auditor', 'Admin'])): ?>
+                                            <?php if (in_array($_SESSION['role'], ['Auditor', 'Admin', 'Superuser'])): ?>
                                                 <a href="queries.php?engagement_id=<?php echo $engagement_id; ?>&delete_id=<?php echo $query['query_id']; ?>" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure you want to delete this query?');">Delete</a>
                                             <?php endif; ?>
                                         </td>

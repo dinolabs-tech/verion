@@ -14,7 +14,7 @@ require_once 'database/db_connection.php';
  * Check if the user is logged in and has the necessary role (Reviewer or Admin).
  * If not, redirect to the login page.
  */
-if (!isset($_SESSION['user_id']) || ($_SESSION['role'] !== 'Reviewer' && $_SESSION['role'] !== 'Admin')) {
+if (!isset($_SESSION['user_id']) || ($_SESSION['role'] !== 'Reviewer' && $_SESSION['role'] !== 'Admin' && $_SESSION['role'] !== 'Superuser')) {
   header("Location: login.php");
   exit();
 }
@@ -90,7 +90,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $engagement) {
       }
     } elseif ($action === 'approve_audit_report' || $action === 'approve_management_letter') {
       // Only Admin or Reviewer (if they are the final approver) can perform this action
-      if ($current_user_role === 'Admin' || ($current_user_role === 'Reviewer' && $current_user_id == $engagement_reviewer_id)) {
+      if ($current_user_role === 'Admin' || ($current_user_role === 'Superuser' && $current_user_id == $engagement_reviewer_id) || ($current_user_role === 'Reviewer' && $current_user_id == $engagement_reviewer_id)) {
         $stmt = $conn->prepare("UPDATE $table_name SET approved_by_user_id = ?, approved_at = CURRENT_TIMESTAMP WHERE $id_column = ? AND engagement_id = ?");
         $stmt->bind_param("iii", $current_user_id, $report_id, $engagement_id);
         if ($stmt->execute()) {
@@ -244,7 +244,7 @@ $conn->close();
                                     <button type="submit" class="btn btn-sm btn-info">Reviewer Approve</button>
                                   </form>
                                 <?php endif; ?>
-                                <?php if (!$report['approved_by_user_id'] && ($report['reviewer_approved'] || $_SESSION['role'] === 'Admin')): ?>
+                                <?php if (!$report['approved_by_user_id'] && ($report['reviewer_approved'] || $_SESSION['role'] === 'Admin' || $_SESSION['role'] === 'Superuser')): ?>
                                   <form action="approve_reports.php?engagement_id=<?php echo $engagement_id; ?>" method="POST" style="display:inline-block;">
                                     <input type="hidden" name="action" value="approve_audit_report">
                                     <input type="hidden" name="report_id" value="<?php echo $report['report_id']; ?>">

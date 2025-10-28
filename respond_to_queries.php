@@ -3,7 +3,7 @@ session_start();
 require_once 'database/db_connection.php';
 
 // Only Auditor, Admin, or Client can access this page
-if (!isset($_SESSION['user_id']) || !in_array($_SESSION['role'], ['Auditor', 'Admin', 'Client', 'Reviewer'])) {
+if (!isset($_SESSION['user_id']) || !in_array($_SESSION['role'], ['Auditor', 'Admin', 'Client', 'Reviewer', 'Superuser'])) {
   header("Location: login.php");
   exit();
 }

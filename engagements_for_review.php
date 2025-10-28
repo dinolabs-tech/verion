@@ -14,7 +14,7 @@ require_once 'database/db_connection.php';
  * Check if the user is logged in and has the necessary role (Reviewer or Admin).
  * If not, redirect to the login page.
  */
-if (!isset($_SESSION['user_id']) || ($_SESSION['role'] !== 'Reviewer' && $_SESSION['role'] !== 'Admin')) {
+if (!isset($_SESSION['user_id']) || ($_SESSION['role'] !== 'Reviewer' && $_SESSION['role'] !== 'Admin' && $_SESSION['role'] !== 'Superuser')) {
   header("Location: login.php");
   exit();
 }
@@ -47,7 +47,7 @@ if ($user_role === 'Reviewer') {
     ");
   // Bind the user ID to the prepared statement.
   $stmt->bind_param("i", $user_id);
-} elseif ($user_role === 'Admin') {
+} elseif ($user_role === 'Admin' || $user_role === 'Superuser') {
   // Admin can see all engagements
   /**
    * If the user is an Admin, fetch all engagements.
@@ -99,8 +99,8 @@ $conn->close();
           <div class="row">
             <div class="col-12">
               <h1 class="mb-4">Engagements for Review</h1>
-              <?php if ($user_role === 'Admin'): ?>
-                <p class="alert alert-info">As an Admin, you see all engagements. Reviewers only see their assigned engagements.</p>
+              <?php if ($user_role === 'Admin' || $user_role === 'Superuser'): ?>
+                <p class="alert alert-info">As an Admin or Superuser, you see all engagements. Reviewers only see their assigned engagements.</p>
               <?php endif; ?>
             </div>
           </div>

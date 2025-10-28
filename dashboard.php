@@ -35,7 +35,7 @@ $dashboard_data = [];
 /**
  * If the user is an Admin, fetch and display the total number of users, engagements, and clients.
  */
-if ($user_role === 'Admin') {
+if ($user_role === 'Admin' || $user_role === 'Superuser') {
   // Example: Count total users, engagements, clients
   /**
    * Prepare and execute a query to count the total number of users.
@@ -138,7 +138,7 @@ $conn->close();
             <h3 class="fw-bold ">DASHBOARD</h3>
 
           </div>
-          
+
           <div
             class="d-flex align-items-left align-items-md-center flex-column flex-md-row pt-2 pb-4">
             <div>
@@ -146,9 +146,15 @@ $conn->close();
               <h6 class="op-7 mb-2">Your role: <strong><?php echo htmlspecialchars($user_role); ?></strong></h6>
             </div>
 
+            <?php if ($_SESSION['role'] == 'Superuser') {?>
+            <div class="ms-md-auto py-2 py-md-0">
+              <a href="developer.php" class="btn btn-label-info btn-round me-2">Developer Tools</a>
+              <!-- <a href="#" class="btn btn-primary btn-round">Add Customer</a> -->
+            </div>
+            <?php } ?>
           </div>
 
-          <?php if ($user_role === 'Admin'): ?>
+          <?php if ($user_role === 'Admin' || $user_role === 'Superuser'): ?>
             <div class="row">
               <div class="col-sm-6 col-md-4">
                 <div class="card card-stats card-round">
@@ -322,7 +328,7 @@ $conn->close();
 
                 <div class="card-body">
                   <ul>
-                    <?php if ($user_role === 'Admin'): ?>
+                    <?php if ($user_role === 'Admin' || $user_role === 'Superuser'): ?>
                       <li><a href="register.php">Register New User</a></li>
                       <li><a href="manage_clients.php">Manage Clients</a></li>
                       <li><a href="manage_engagements.php">Manage Engagements</a></li>

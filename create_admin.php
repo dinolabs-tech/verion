@@ -7,11 +7,6 @@
 
 require_once 'database/db_connection.php';
 
-// Define default admin user credentials
-$username = 'admin';
-$email = 'admin@example.com';
-$password = 'password123'; // Default password, should be changed after first login
-$role = 'Admin';
 
 // Hash the default password for security.
 $hashed_password = password_hash($password, PASSWORD_DEFAULT);

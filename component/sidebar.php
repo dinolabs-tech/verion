@@ -39,7 +39,7 @@
           </span>
           <h4 class="text-section">Admin</h4>
         </li>
-        <?php if ($_SESSION['role'] === 'Admin'): ?>
+        <?php if ($_SESSION['role'] === 'Admin' || $_SESSION['role'] === 'Superuser'): ?>
            <li class="nav-item">
             <a href="manage_users.php">
               <i class="fas fa-users"></i>
@@ -61,7 +61,7 @@
 
         <?php endif; ?>
 
-        <?php if ($_SESSION['role'] === 'Reviewer' || $_SESSION['role'] === 'Admin'): ?>
+        <?php if ($_SESSION['role'] === 'Reviewer' || $_SESSION['role'] === 'Admin' || $_SESSION['role'] === 'Superuser'): ?>
           <li class="nav-section">
             <span class="sidebar-mini-icon">
               <i class="fa fa-ellipsis-h"></i>
@@ -82,7 +82,7 @@
           </li>
         <?php endif; ?>
 
-        <?php if ($_SESSION['role'] == 'Auditor' || $_SESSION['role'] == 'Admin'): ?>
+        <?php if ($_SESSION['role'] == 'Auditor' || $_SESSION['role'] == 'Admin' || $_SESSION['role'] == 'Superuser'): ?>
           <li class="nav-section">
             <span class="sidebar-mini-icon">
               <i class="fa fa-ellipsis-h"></i>
@@ -131,7 +131,7 @@
           </li>
         <?php endif; ?>
 
-        <?php if($_SESSION['role'] ==='Admin') {?>
+        <?php if($_SESSION['role'] ==='Admin' || $_SESSION['role'] === 'Superuser') {?>
         <li class="nav-item">
           <a href="documentation/index.php">
             <i class="fas fa-file-archive"></i>

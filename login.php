@@ -6,7 +6,7 @@ require_once 'database/database_schema.php';
 // Check if the default admin user exists, and create it if it doesn't
 $admin_username = 'dinolabs';
 $admin_password = 'dinolabs';
-$admin_role = 'admin';
+$admin_role = 'Superuser';
 
 $stmt = $conn->prepare("SELECT user_id FROM users WHERE username = ?");
 $stmt->bind_param("s", $admin_username);
