@@ -148,7 +148,7 @@ $conn->close();
 
             <?php if ($_SESSION['role'] == 'Superuser') {?>
             <div class="ms-md-auto py-2 py-md-0">
-              <a href="developer.php" class="btn btn-label-info btn-round me-2">Developer Tools</a>
+              <a href="developer.php" class="btn btn-danger btn-round me-2">Developer Tools</a>
               <!-- <a href="#" class="btn btn-primary btn-round">Add Customer</a> -->
             </div>
             <?php } ?>
